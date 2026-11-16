@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahmed Sameh Blueprint Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout idea: the page is a drawing set. Every section is a framed sheet with a title block; one world, blueprint blue. */
+:root {
+  --bp: #0A3069;
+  --bp-deep: #082754;
+  --ink: #EAF2FF;
+  --dim: #A9C3EA;
+  --line: rgba(234, 242, 255, 0.34);
+  --hot: #FFD166;
+  --display: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; color: var(--ink); font-family: var(--mono); font-size: 14.5px; line-height: 1.65;
+  background-color: var(--bp);
+  background-image: linear-gradient(rgba(234,242,255,.10) 1px, transparent 1px), linear-gradient(90deg, rgba(234,242,255,.10) 1px, transparent 1px), linear-gradient(rgba(234,242,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(234,242,255,.045) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--hot); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1; margin: 0; text-wrap: balance; }
+p { margin: 0; } ul { margin: 0; padding-left: 1.2em; } figure { margin: 0; }
+
+.top { position: sticky; top: 0; z-index: 20; background: var(--bp-deep); border-bottom: 1px solid var(--line); }
+.top div { max-width: 1180px; margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 6px 22px; justify-content: space-between; align-items: center; }
+.top b { font-family: var(--display); font-size: 19px; letter-spacing: .06em; text-transform: uppercase; }
+.top nav { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.top a { text-decoration: none; font-size: 12.5px; color: var(--dim); letter-spacing: .08em; }
+.top a:hover, .top a.on { color: var(--hot); }
+
+main { padding: 20px 16px 40px; display: flex; flex-direction: column; gap: 28px; }
+.sheet { position: relative; max-width: 1180px; width: 100%; margin: 0 auto; border: 1.5px solid var(--line); padding: 48px 40px 0; background: rgba(8, 39, 84, 0.55); }
+.sheet-b { position: absolute; inset: -1.5px; width: calc(100% + 3px); height: calc(100% + 3px); pointer-events: none; display: none; overflow: visible; }
+.sheet-b rect { fill: none; stroke: var(--ink); stroke-opacity: .5; stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-dasharray: 1; }
+.motion .sheet { border-color: transparent; }
+.motion .sheet-b { display: block; }
+.sh { display: flex; flex-direction: column; gap: 10px; margin-bottom: 34px; }
+.tag { font-size: 12px; letter-spacing: .16em; color: var(--hot); }
+.sh h2 { font-size: clamp(34px, 5.4vw, 62px); }
+.tb { margin: 44px -40px 0; border-top: 1.5px solid var(--line); display: grid; grid-template-columns: 1.2fr 1.6fr 1.4fr 1fr; font-size: 11px; letter-spacing: .12em; color: var(--dim); }
+.tb span { padding: 9px 14px; border-left: 1px solid var(--line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tb span:first-child { border-left: 0; } .tb span:last-child { color: var(--hot); }
+
+/* cover */
+.cover { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; align-items: center; }
+.cover-t { display: flex; flex-direction: column; gap: 18px; }
+.cover h1 { font-size: clamp(64px, 12vw, 150px); font-weight: 700; line-height: .86; }
+.cover h1 span { display: block; }
+.cover h1 .out { color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+.role { font-size: 15px; letter-spacing: .1em; color: var(--hot); }
+.sum { color: var(--dim); max-width: 56ch; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-block; padding: 10px 18px; border: 1.5px solid var(--ink); text-decoration: none; font-size: 12.5px; letter-spacing: .12em; }
+.btn.fill { background: var(--hot); border-color: var(--hot); color: #082754; font-weight: 500; }
+.btn:hover { background: var(--ink); color: var(--bp-deep); border-color: var(--ink); }
+.elev { width: 100%; height: auto; }
+.elev text { font-family: var(--mono); font-size: 13px; fill: var(--dim); }
+.elev .w { stroke: var(--ink); fill: none; }
+.elev .g { stroke: var(--line); fill: none; stroke-dasharray: 5 6; }
+.elev .d { stroke: var(--hot); fill: none; stroke-width: 1.2; }
+.elev .dt { fill: var(--hot); }
+
+/* notes (stats) */
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); }
+.note { padding: 22px 22px 24px; border-left: 1px solid var(--line); }
+.note:first-child { border-left: 0; }
+.note b { display: block; font-family: var(--display); font-size: clamp(56px, 8vw, 96px); line-height: .9; font-weight: 600; }
+.note span { color: var(--dim); font-size: 13px; }
+
+/* schedule (experience) */
+.xp { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 6px 28px; padding: 22px 0; border-top: 1px solid var(--line); position: relative; }
+.xp-when { color: var(--hot); font-size: 12.5px; letter-spacing: .06em; }
+.xp-body { display: flex; flex-direction: column; gap: 6px; }
+.xp h3 { font-size: 28px; }
+.xp-role { color: var(--dim); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+.xp-proj { font-size: 14px; }
+.xp ul { color: var(--dim); font-size: 13.5px; max-width: 74ch; }
+
+/* stages */
+.stages { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; }
+.stage { border: 1px solid var(--line); border-left-width: 0; padding: 18px 16px 22px; display: flex; flex-direction: column; gap: 8px; position: relative; }
+.stage:first-child { border-left-width: 1px; }
+.stage small { color: var(--hot); letter-spacing: .14em; font-size: 12px; }
+.stage h3 { font-size: 23px; }
+.stage p { color: var(--dim); font-size: 13px; line-height: 1.5; }
+.stage::after { content: "▸"; position: absolute; right: -8px; top: 14px; color: var(--hot); background: var(--bp-deep); font-size: 14px; line-height: 1; z-index: 1; }
+.stage:last-child::after { display: none; }
+
+/* viewports (projects) */
+.vps { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 26px 22px; }
+.vp { grid-column: span 2; display: flex; flex-direction: column; gap: 10px; }
+.vp:nth-child(-n+2) { grid-column: span 3; }
+.vp-img { position: relative; overflow: hidden; border: 1.5px solid var(--ink); background: #1250A6; }
+.vp-img::before, .vp-img::after { content: ""; position: absolute; width: 16px; height: 16px; border: 2px solid var(--hot); z-index: 2; }
+.vp-img::before { left: 6px; top: 6px; border-right: 0; border-bottom: 0; }
+.vp-img::after { right: 6px; bottom: 6px; border-left: 0; border-top: 0; }
+.vp-img img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: filter .6s, opacity .6s; }
+.motion .vp-img img { filter: grayscale(1) contrast(1.15); mix-blend-mode: screen; opacity: .85; }
+.motion .vp.lit .vp-img img, .motion .vp:hover .vp-img img { filter: none; mix-blend-mode: normal; opacity: 1; }
+.scan { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--hot); box-shadow: 0 0 14px 2px var(--hot); opacity: 0; z-index: 3; }
+.vp figcaption { display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; color: var(--dim); }
+.vp figcaption b { font-family: var(--display); font-size: 24px; font-weight: 600; text-transform: uppercase; color: var(--ink); line-height: 1.05; }
+.vp-no { color: var(--hot); letter-spacing: .14em; font-size: 11.5px; }
+.vp em { font-style: normal; font-size: 11px; opacity: .8; }
+.also { margin-top: 26px; color: var(--dim); font-size: 13px; }
+
+/* detail */
+.det { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 34px; align-items: center; }
+.det p { color: var(--dim); max-width: 50ch; }
+.cmp { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: center; }
+.cmp svg { width: 100%; height: auto; }
+.cmp .raft { fill: rgba(234,242,255,.10); stroke: var(--ink); stroke-width: 2; }
+.cmp .col { fill: var(--hot); }
+.cmp span { color: var(--hot); font-size: 22px; }
+figcaption.c { font-size: 12px; color: var(--dim); letter-spacing: .08em; margin-top: 6px; }
+
+/* lists */
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); }
+.cols.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.card { padding: 22px; border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; }
+.card:first-child { border-left: 0; }
+.card h3 { font-size: 25px; }
+.card small { color: var(--hot); font-size: 11.5px; letter-spacing: .12em; }
+.card ul, .card p { color: var(--dim); font-size: 13.5px; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 20px; }
+.pills b { font-weight: 500; font-size: 12px; letter-spacing: .12em; color: var(--dim); margin-right: 6px; text-transform: uppercase; }
+.pill { border: 1px solid var(--ink); padding: 5px 12px; font-size: 12.5px; }
+.sub { margin-top: 44px; }
+
+/* contact */
+.c-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); }
+.c-item { padding: 18px 20px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; }
+.c-item:nth-child(-n+2) { border-top: 0; } .c-item:nth-child(odd) { border-left: 0; }
+.c-item span { font-size: 11.5px; letter-spacing: .14em; color: var(--hot); text-transform: uppercase; }
+.c-item a, .c-item b { font-family: var(--display); font-size: clamp(20px, 2.6vw, 30px); font-weight: 600; overflow-wrap: anywhere; }
+.foot { max-width: 1180px; margin: 0 auto; padding: 0 20px 28px; color: var(--dim); font-size: 11.5px; }
+
+/* cursor crosshair */
+.ch { position: fixed; pointer-events: none; z-index: 40; background: rgba(255, 209, 102, .35); display: none; }
+.ch-x { left: 0; right: 0; height: 1px; top: 0; } .ch-y { top: 0; bottom: 0; width: 1px; left: 0; }
+.xy { position: fixed; left: 12px; bottom: 10px; z-index: 40; font-size: 11px; letter-spacing: .1em; color: var(--hot); background: var(--bp-deep); padding: 3px 8px; border: 1px solid var(--line); display: none; }
+@media (hover: hover) and (pointer: fine) { .motion .ch, .motion .xy { display: block; } }
+
+@media (max-width: 900px) {
+  .sheet { padding: 34px 20px 0; } .tb { margin: 34px -20px 0; grid-template-columns: 1fr 1fr; } .tb span:nth-child(2), .tb span:nth-child(1) { display: none; }
+  .cover, .det { grid-template-columns: 1fr; } .elev { max-width: 420px; }
+  .stages { grid-template-columns: 1fr 1fr; } .stage { border-left-width: 1px; margin: -0.5px; } .stage::after { display: none; }
+  .vp, .vp:nth-child(-n+2) { grid-column: span 3; } .cols, .cols.four { grid-template-columns: 1fr 1fr; } .card { border-top: 1px solid var(--line); margin: -0.5px; }
+  .xp { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .notes, .cols, .cols.four, .c-list, .stages { grid-template-columns: 1fr; } .note, .c-item { border-left: 0; border-top: 1px solid var(--line); } .note:first-child { border-top: 0; }
+  .vp, .vp:nth-child(-n+2) { grid-column: span 6; } .cmp { grid-template-columns: 1fr; } .cmp span { justify-self: center; transform: rotate(90deg); }
+}
+</style>
+</head>
+<body>
+<div class="ch ch-x" aria-hidden="true"></div><div class="ch ch-y" aria-hidden="true"></div><div class="xy" aria-hidden="true">X 0000 · Y 0000</div>
+
+<header class="top"><div>
+  <b>Ahmed Sameh</b>
+  <nav aria-label="Sheets"><a href="#experience">S-201 EXPERIENCE</a><a href="#projects">S-401 PROJECTS</a><a href="#skills">S-601 SKILLS</a><a href="#contact">S-701 CONTACT</a></nav>
+</div></header>
+
+<main>
+
+<section class="sheet" id="cover">
+  <svg class="sheet-b" aria-hidden="true"><rect width="100%" height="100%" pathLength="1"/></svg>
+  <div class="cover">
+    <div class="cover-t">
+      <p class="tag">S-001 / COVER SHEET</p>
+      <h1><span>Ahmed</span><span class="out">Sameh</span></h1>
+      <p class="role">STRUCTURAL BIM ENGINEER · BIM COORDINATOR</p>
+      <p class="sum">I build and coordinate structural BIM models for complex building and infrastructure projects, from Preliminary Design and IFC submissions through shop drawings to As-Built. Currently at Dar Al-Handasah on Al Maktoum International Airport.</p>
+      <div class="cta"><a class="btn fill" href="#projects">VIEW PROJECTS</a><a class="btn" href="#contact">CONTACT</a></div>
+    </div>
+    <svg class="elev" viewBox="0 0 520 580" role="img" aria-label="Elevation drawing of a four-storey, three-bay structural frame with grid lines and dimensions">
+      <g class="g"><line x1="90" y1="70" x2="90" y2="500"/><line x1="210" y1="70" x2="210" y2="500"/><line x1="330" y1="70" x2="330" y2="500"/><line x1="450" y1="70" x2="450" y2="500"/></g>
+      <g class="bub"><circle class="w" cx="90" cy="50" r="18"/><circle class="w" cx="210" cy="50" r="18"/><circle class="w" cx="330" cy="50" r="18"/><circle class="w" cx="450" cy="50" r="18"/>
+        <text x="90" y="55" text-anchor="middle">A</text><text x="210" y="55" text-anchor="middle">B</text><text x="330" y="55" text-anchor="middle">C</text><text x="450" y="55" text-anchor="middle">D</text></g>
+      <g class="w cols" stroke-width="5"><line x1="90" y1="480" x2="90" y2="120"/><line x1="210" y1="480" x2="210" y2="120"/><line x1="330" y1="480" x2="330" y2="120"/><line x1="450" y1="480" x2="450" y2="120"/></g>
+      <g class="w beams" stroke-width="5"><line x1="90" y1="390" x2="450" y2="390"/><line x1="90" y1="300" x2="450" y2="300"/><line x1="90" y1="210" x2="450" y2="210"/><line x1="90" y1="120" x2="450" y2="120"/></g>
+      <g class="w foot" stroke-width="2"><rect x="62" y="480" width="56" height="18"/><rect x="182" y="480" width="56" height="18"/><rect x="302" y="480" width="56" height="18"/><rect x="422" y="480" width="56" height="18"/><line x1="30" y1="480" x2="500" y2="480"/></g>
+      <g class="dims"><path class="d" d="M90 530 H450 M90 522 V538 M210 522 V538 M330 522 V538 M450 522 V538"/><text class="dt" x="270" y="554" text-anchor="middle">3 BAYS</text>
+        <path class="d" d="M36 120 V480 M28 120 H44 M28 210 H44 M28 300 H44 M28 390 H44 M28 480 H44"/><text class="dt" x="22" y="300" text-anchor="middle" transform="rotate(-90 22 300)">4 STOREYS</text></g>
+      <text x="500" y="574" text-anchor="end">TYPICAL FRAME · NOT TO SCALE</text>
+    </svg>
+  </div>
+  <div class="tb"><span>AHMED SAMEH</span><span>STRUCTURAL BIM PORTFOLIO</span><span>COVER</span><span>SHEET S-001</span></div>
+</section>
+
+<section class="sheet" id="notes">
+  <svg class="sheet-b" aria-hidden="true"><rect width="100%" height="100%" pathLength="1"/></svg>
+  <div class="sh"><p class="tag">S-101 / GENERAL NOTES</p><h2>At a glance</h2></div>
+  <div class="notes">
+    <div class="note"><b data-n="13">13</b><span>key projects delivered or in progress</span></div>
+    <div class="note"><b data-n="3">3</b><span>countries: UAE, Saudi Arabia and Egypt</span></div>
+    <div class="note"><b data-n="5">5</b><span>engineering consultancies since 2023</span></div>
+  </div>
+  <div class="tb"><span>AHMED SAMEH</span><span>STRUCTURAL BIM PORTFOLIO</span><span>GENERAL NOTES</span><span>SHEET S-101</span></div>
+</section>
+
+<section class="sheet" id="experience">
+  <svg class="sheet-b" aria-hidden="true"><rect width="100%" height="100%" pathLength="1"/></svg>
+  <div class="sh"><p class="tag">S-201 / EXPERIENCE SCHEDULE</p><h2>From RC detailing to BIM coordination</h2></div>
+  <div class="xp"><p class="xp-when">Jun 2026 to present</p><div class="xp-body"><h3>Dar Al-Handasah</h3><p class="xp-role">Structural BIM Engineer</p><p class="xp-proj">AMIA: The Ultimate Airport, Concourse 4 (UAE)</p><ul><li>Coordinate structural BIM with multidisciplinary teams through design development and submission stages.</li><li>Prepare, review and coordinate Preliminary Design, Draft Final Design and IFC deliverables.</li><li>Identify and resolve interdisciplinary clashes, keeping models, drawings and packages consistent across revisions.</li></ul></div></div>
+<div class="xp"><p class="xp-when">Jun 2024 to Jun 2026</p><div class="xp-body"><h3>Advanced Consultancy Center (ACC)</h3><p class="xp-role">Structural BIM Engineer</p><p class="xp-proj">Seven Makkah, Seven Jazan, Seven Ahsa, Seven Khobar and CEER 2 (KSA)</p><ul><li>Developed and maintained structural BIM models for entertainment and industrial developments.</li><li>Prepared reinforced concrete shop drawings and reinforcement detailing.</li><li>Took models through the required Levels of Development to As-Built, coordinating with architectural and MEP disciplines.</li></ul></div></div>
+<div class="xp"><p class="xp-when">Jan 2024 to Jun 2024</p><div class="xp-body"><h3>Sanam Consultant</h3><p class="xp-role">Structural Engineer</p><p class="xp-proj">Prime Business Resort</p><ul><li>Prepared reinforced concrete structural detail drawings to approved design documentation.</li></ul></div></div>
+<div class="xp"><p class="xp-when">Mar 2023 to Jan 2024</p><div class="xp-body"><h3>Alpha for Engineering Solutions</h3><p class="xp-role">Structural Engineer</p><p class="xp-proj">Faculty of Science at Beni Suif University, National Bank of Kuwait, North Coast and Zayed town houses, King Salman Park (KSA)</p><ul><li>Prepared RC shop drawings and reinforcement detailing for slabs, beams, columns and foundations.</li></ul></div></div>
+<div class="xp"><p class="xp-when">Jan 2023 to Mar 2023</p><div class="xp-body"><h3>Al Khaldya Consultant</h3><p class="xp-role">Structural Engineer (Intern)</p><p class="xp-proj">New Administrative Capital Mall</p><ul><li>Redesigned the foundation from a uniform raft to isolated footings.</li></ul></div></div>
+  <div class="tb"><span>AHMED SAMEH</span><span>STRUCTURAL BIM PORTFOLIO</span><span>EXPERIENCE</span><span>SHEET S-201</span></div>
+</section>
+
+<section class="sheet" id="stages">
+  <svg class="sheet-b" aria-hidden="true"><rect width="100%" height="100%" pathLength="1"/></svg>
+  <div class="sh"><p class="tag">S-301 / DELIVERY STAGES</p><h2>Deliverables across the project lifecycle</h2></div>
+  <div class="stages">
+  <div class="stage"><small>01</small><h3>Preliminary Design</h3><p>Structural models and drawings coordinated with multidisciplinary teams.</p></div>
+<div class="stage"><small>02</small><h3>Draft Final Design</h3><p>Clash review and resolution, with revisions kept consistent across models and drawings.</p></div>
+<div class="stage"><small>03</small><h3>Issued for Construction</h3><p>IFC packages verified against project requirements and applicable standards.</p></div>
+<div class="stage"><small>04</small><h3>Construction</h3><p>RC shop drawings, reinforcement detailing and LOD development.</p></div>
+<div class="stage"><small>05</small><h3>As-Built</h3><p>Construction-stage updates carried through to As-Built deliverables.</p></div>
+  </div>
+  <div class="tb"><span>AHMED SAMEH</span><span>STRUCTURAL BIM PORTFOLIO</span><span>DELIVERY STAGES</span><span>SHEET S-301</span></div>
+</section>
+
+<section class="sheet" id="projects">
+  <svg class="sheet-b" aria-hidden="true"><rect width="100%" height="100%" pathLength="1"/></svg>
+  <div class="sh"><p class="tag">S-401 / PROJECT VIEWS</p><h2>Selected projects</h2></div>
+  <div class="vps">
+  <figure class="vp" data-big="1920"><div class="vp-img"><img src="img/amia.jpg" alt="Design render of the new Al Maktoum International Airport terminal interior" width="1920" height="1082"><i class="scan"></i></div><figcaption><span class="vp-no">VIEW 01</span><b>AMIA: The Ultimate Airport, Concourse 4</b><span>Dar Al-Handasah · 2026 to present · UAE</span><span>Structural BIM coordination, design-stage and IFC deliverables</span><em>Image: Government of Dubai Media Office</em></figcaption></figure>
+<figure class="vp" data-big="930"><div class="vp-img"><img src="img/jazan.jpg" alt="Render of the Seven Jazan entertainment destination at night" width="930" height="523"><i class="scan"></i></div><figcaption><span class="vp-no">VIEW 02</span><b>Seven Jazan</b><span>ACC · 2024 to 2026 · Jazan, Saudi Arabia</span><span>Structural BIM modelling, coordination and shop drawings</span><em>Image: SEVEN</em></figcaption></figure>
+<figure class="vp" data-big="1355"><div class="vp-img"><img src="img/ceer.jpg" alt="Aerial render of the CEER electric vehicle manufacturing complex" width="1355" height="852"><i class="scan"></i></div><figcaption><span class="vp-no">VIEW 03</span><b>CEER manufacturing complex</b><span>ACC · 2024 to 2026 · Saudi Arabia</span><span>Structural BIM modelling, coordination and shop drawings</span><em>Image: Ceer</em></figcaption></figure>
+<figure class="vp" data-big="480"><div class="vp-img"><img src="img/ahsa.jpg" alt="Seven Ahsa construction site with a tower crane and foundations in progress" width="480" height="360"><i class="scan"></i></div><figcaption><span class="vp-no">VIEW 04</span><b>Seven Ahsa</b><span>ACC · 2024 to 2026 · Al Ahsa, Saudi Arabia</span><span>3D structural modelling, coordination and shop-drawing packages</span><em>Site photo</em></figcaption></figure>
+<figure class="vp" data-big="480"><div class="vp-img"><img src="img/nbk.jpg" alt="Render of the National Bank of Kuwait Egypt headquarters" width="480" height="356"><i class="scan"></i></div><figcaption><span class="vp-no">VIEW 05</span><b>NBK Egypt Headquarters</b><span>Alpha · 2023 to 2024 · New Administrative Capital, Egypt</span><span>RC detail drawings</span><em></em></figcaption></figure>
+<figure class="vp" data-big="480"><div class="vp-img"><img src="img/mountain-view.jpg" alt="Mountain View town houses around a landscaped lagoon" width="480" height="363"><i class="scan"></i></div><figcaption><span class="vp-no">VIEW 06</span><b>Mountain View town houses</b><span>Alpha · 2023 to 2024 · North Coast and Zayed, Egypt</span><span>Shop drawings and rebar detailing</span><em></em></figcaption></figure>
+<figure class="vp" data-big="480"><div class="vp-img"><img src="img/capital-mall.jpg" alt="Render of the New Administrative Capital Mall at dusk" width="480" height="250"><i class="scan"></i></div><figcaption><span class="vp-no">VIEW 07</span><b>New Administrative Capital Mall</b><span>Al Khaldya · 2023 · Egypt</span><span>Foundation redesign from raft to isolated footings</span><em></em></figcaption></figure>
+<figure class="vp" data-big="480"><div class="vp-img"><img src="img/prime.jpg" alt="Render of the Prime Business Resort courtyard" width="480" height="270"><i class="scan"></i></div><figcaption><span class="vp-no">VIEW 08</span><b>Prime Business Resort</b><span>Sanam · 2024 · Riyadh, Saudi Arabia</span><span>RC structural detail drawings</span><em></em></figcaption></figure>
+  </div>
+  <p class="also">Also: Seven Makkah and Seven Khobar (ACC), Faculty of Science at Beni Suif University and King Salman Park, KSA (Alpha).</p>
+  <div class="tb"><span>AHMED SAMEH</span><span>STRUCTURAL BIM PORTFOLIO</span><span>PROJECT VIEWS</span><span>SHEET S-401</span></div>
+</section>
+
+<section class="sheet" id="detail">
+  <svg class="sheet-b" aria-hidden="true"><rect width="100%" height="100%" pathLength="1"/></svg>
+  <div class="det">
+    <div class="sh" style="margin-bottom:0"><p class="tag">S-501 / DETAIL</p><h2 style="font-size:clamp(30px,4.4vw,50px)">Foundation redesign, New Administrative Capital Mall</h2>
+      <p>As an intern at Al Khaldya Consultant, I redesigned the foundation from a uniform raft to an isolated-footings system, reducing material quantities, concrete volume and construction cost.</p></div>
+    <div>
+      <div class="cmp">
+        <figure><svg viewBox="0 0 560 320" role="img" aria-label="Plan of twelve columns on one continuous raft slab"><rect class="raft" x="1" y="1" width="558" height="318"/>
+          <g class="col"><rect x="58" y="41" width="24" height="24"/><rect x="198" y="41" width="24" height="24"/><rect x="338" y="41" width="24" height="24"/><rect x="478" y="41" width="24" height="24"/><rect x="58" y="148" width="24" height="24"/><rect x="198" y="148" width="24" height="24"/><rect x="338" y="148" width="24" height="24"/><rect x="478" y="148" width="24" height="24"/><rect x="58" y="255" width="24" height="24"/><rect x="198" y="255" width="24" height="24"/><rect x="338" y="255" width="24" height="24"/><rect x="478" y="255" width="24" height="24"/></g></svg>
+          <figcaption class="c">BEFORE: UNIFORM RAFT</figcaption></figure>
+        <span aria-hidden="true">→</span>
+        <figure><svg viewBox="0 0 560 320" role="img" aria-label="Plan of the same twelve columns, each on its own footing">
+          <g class="raft ft"><rect x="20" y="15" width="100" height="76"/><rect x="160" y="15" width="100" height="76"/><rect x="300" y="15" width="100" height="76"/><rect x="440" y="15" width="100" height="76"/><rect x="20" y="122" width="100" height="76"/><rect x="160" y="122" width="100" height="76"/><rect x="300" y="122" width="100" height="76"/><rect x="440" y="122" width="100" height="76"/><rect x="20" y="229" width="100" height="76"/><rect x="160" y="229" width="100" height="76"/><rect x="300" y="229" width="100" height="76"/><rect x="440" y="229" width="100" height="76"/></g>
+          <g class="col"><rect x="58" y="41" width="24" height="24"/><rect x="198" y="41" width="24" height="24"/><rect x="338" y="41" width="24" height="24"/><rect x="478" y="41" width="24" height="24"/><rect x="58" y="148" width="24" height="24"/><rect x="198" y="148" width="24" height="24"/><rect x="338" y="148" width="24" height="24"/><rect x="478" y="148" width="24" height="24"/><rect x="58" y="255" width="24" height="24"/><rect x="198" y="255" width="24" height="24"/><rect x="338" y="255" width="24" height="24"/><rect x="478" y="255" width="24" height="24"/></g></svg>
+          <figcaption class="c">AFTER: ISOLATED FOOTINGS</figcaption></figure>
+      </div>
+      <p class="c" style="font-size:11.5px;color:var(--dim);margin-top:8px">Schematic plans, not the actual column layout.</p>
+    </div>
+  </div>
+  <div class="tb"><span>AHMED SAMEH</span><span>STRUCTURAL BIM PORTFOLIO</span><span>FOUNDATION DETAIL</span><span>SHEET S-501</span></div>
+</section>
+
+<section class="sheet" id="skills">
+  <svg class="sheet-b" aria-hidden="true"><rect width="100%" height="100%" pathLength="1"/></svg>
+  <div class="sh"><p class="tag">S-601 / SKILLS AND QUALIFICATIONS</p><h2>Core capabilities</h2></div>
+  <div class="cols">
+  <div class="card"><h3>BIM and coordination</h3><ul><li>Structural BIM coordination</li><li>Multidisciplinary model coordination</li><li>Clash detection and resolution</li><li>Model and drawing review</li><li>Design-stage submissions</li></ul></div>
+<div class="card"><h3>Structural engineering</h3><ul><li>Reinforced concrete detailing</li><li>Structural shop drawings</li><li>Concrete structural drawings</li></ul></div>
+<div class="card"><h3>Model development and deliverables</h3><ul><li>LOD development</li><li>Preliminary and Draft Final Design</li><li>IFC submissions</li><li>Construction documentation</li><li>As-Built stage updates</li></ul></div>
+  </div>
+  <div class="pills"><b>Software</b><span class="pill">Revit</span><span class="pill">Navisworks</span><span class="pill">AutoCAD</span><span class="pill">AutoCAD Structural Detailing (ASD)</span></div>
+  <div class="sh sub"><h2 style="font-size:clamp(28px,4vw,44px)">Qualifications</h2></div>
+  <div class="cols four">
+  <div class="card"><small>DEGREE · 2017 TO 2022</small><h3>Bachelor of Civil Engineering</h3><p>Helwan University</p></div>
+<div class="card"><small>GRADUATION PROJECT</small><h3>Concrete structure design</h3><p>Grade: 84%</p></div>
+<div class="card"><small>DIPLOMA</small><h3>Structural BIM Diploma</h3><p>KAITECH</p></div>
+<div class="card"><small>TRAINING</small><h3>Consulting Design Office course</h3><p>Radiance Consulting Office. Grade: Excellent</p></div>
+  </div>
+  <div class="pills"><b>Languages</b><span class="pill">Arabic (native)</span><span class="pill">English (fluent)</span></div>
+  <div class="tb"><span>AHMED SAMEH</span><span>STRUCTURAL BIM PORTFOLIO</span><span>SKILLS</span><span>SHEET S-601</span></div>
+</section>
+
+<section class="sheet" id="contact">
+  <svg class="sheet-b" aria-hidden="true"><rect width="100%" height="100%" pathLength="1"/></svg>
+  <div class="sh"><p class="tag">S-701 / CONTACT</p><h2>Get in touch</h2></div>
+  <div class="c-list"><div class="c-item"><span>Email</span><a href="mailto:engahmedsameh2@gmail.com">engahmedsameh2@gmail.com</a></div><div class="c-item"><span>Phone</span><a href="tel:+201151983777">+20 115 198 3777</a></div><div class="c-item"><span>LinkedIn</span><a href="https://www.linkedin.com/in/ahmed-sameh-5009551b3/">linkedin.com/in/ahmed-sameh-5009551b3</a></div><div class="c-item"><span>Location</span><b>Cairo, Egypt</b></div></div>
+  <div class="tb"><span>AHMED SAMEH</span><span>STRUCTURAL BIM PORTFOLIO</span><span>CONTACT</span><span>SHEET S-701</span></div>
+</section>
+
+</main>
+<p class="foot">Project renders belong to their respective owners and are shown to identify the projects.</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script>
+/* Shared motion bootstrap: runs init once fonts are ready; if anything fails, every element is restored to its resting state. */
+window.__motion = function (init) {
+  if (!window.gsap || !window.ScrollTrigger) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  gsap.registerPlugin(ScrollTrigger);
+  var hasSplit = !!window.SplitText; if (hasSplit) gsap.registerPlugin(SplitText);
+  var k = {
+    $: function (q, c) { return Array.prototype.slice.call((c || document).querySelectorAll(q)); },
+    split: function (el, o) { if (!hasSplit || !el) return null; if (o && o.type === 'chars') o.type = 'words,chars'; try { return new SplitText(el, o); } catch (e) { return null; } },
+    st: function (trigger, start) { return { trigger: trigger, start: start || 'top 84%', once: true }; },
+    count: function (el, st) { var n = +el.getAttribute('data-n'), o = { v: 0 }; gsap.to(o, { v: n, duration: 1.4, ease: 'power2.out', scrollTrigger: st, onUpdate: function () { el.textContent = Math.round(o.v); } }); },
+    scramble: function (el, st) {
+      var txt = el.textContent, chars = 'ABCDEFGHJKLMNPRSTUVXYZ0123456789/-', o = { p: 0 };
+      gsap.to(o, { p: 1, duration: Math.min(1.4, 0.4 + txt.length * 0.03), ease: 'none', scrollTrigger: st,
+        onUpdate: function () { var n = Math.floor(o.p * txt.length), s = txt.slice(0, n); for (var i = n; i < txt.length; i++) s += txt[i] === ' ' ? ' ' : chars[(Math.random() * chars.length) | 0]; el.textContent = s; },
+        onComplete: function () { el.textContent = txt; } });
+    },
+    magnet: function (b, f) { var x = gsap.quickTo(b, 'x', { duration: 0.4, ease: 'power3' }), y = gsap.quickTo(b, 'y', { duration: 0.4, ease: 'power3' }); f = f || 0.3;
+      b.addEventListener('pointermove', function (e) { var r = b.getBoundingClientRect(); x((e.clientX - r.left - r.width / 2) * f); y((e.clientY - r.top - r.height / 2) * f); });
+      b.addEventListener('pointerleave', function () { x(0); y(0); }); }
+  };
+  var done = false;
+  var go = function () {
+    if (done) return; done = true;
+    try { document.documentElement.classList.add('motion'); init(k); ScrollTrigger.refresh(); }
+    catch (e) { console.error('motion failed', e);
+      try { ScrollTrigger.getAll().forEach(function (t) { t.kill(true); }); gsap.globalTimeline.clear(); gsap.set('body *', { clearProps: 'all' }); } catch (e2) {}
+      document.documentElement.classList.remove('motion'); }
+  };
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(go); setTimeout(go, 1500); } else go();
+  window.addEventListener('load', function () { try { ScrollTrigger.refresh(); } catch (e) {} });
+};
+</script>
+<script>
+__motion(function (k) {
+  var $ = k.$;
+  /* crosshair cursor with a live coordinate readout */
+  var cx = document.querySelector('.ch-x'), cy = document.querySelector('.ch-y'), xy = document.querySelector('.xy');
+  var pad = function (n) { return ('0000' + Math.max(0, Math.round(n))).slice(-4); };
+  window.addEventListener('pointermove', function (e) {
+    cx.style.transform = 'translateY(' + e.clientY + 'px)'; cy.style.transform = 'translateX(' + e.clientX + 'px)';
+    xy.textContent = 'X ' + pad(e.clientX) + ' · Y ' + pad(e.clientY + window.scrollY);
+  });
+  $('.top nav a').forEach(function (a) { var s = document.querySelector(a.getAttribute('href')); if (s) ScrollTrigger.create({ trigger: s, start: 'top 50%', end: 'bottom 50%', toggleClass: { targets: a, className: 'on' } }); });
+
+  /* every sheet: frame is drawn, then the title block fills in */
+  $('.sheet').forEach(function (s, i) {
+    var st = k.st(s, i === 0 ? 'top 100%' : 'top 80%');
+    gsap.fromTo($('.sheet-b rect', s), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut', scrollTrigger: st });
+    gsap.from($('.tb span', s), { opacity: 0, x: 20, duration: 0.5, stagger: 0.08, delay: 0.9, scrollTrigger: st });
+    var tag = s.querySelector('.tag'); if (tag) k.scramble(tag, st);
+    var h = s.querySelector('.sh h2');
+    if (h) { var sp = k.split(h, { type: 'lines', mask: 'lines' }); if (sp) gsap.from(sp.lines, { yPercent: 105, duration: 0.9, stagger: 0.1, ease: 'power3.out', delay: 0.2, scrollTrigger: st }); else gsap.from(h, { y: 30, opacity: 0, duration: 0.8, scrollTrigger: st }); }
+  });
+
+  /* cover: name, then the elevation is drafted line by line with its dimensions */
+  var t = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.2 });
+  var a = k.split('.cover h1 span:first-child', { type: 'chars', mask: 'chars' }), b = document.querySelector('.cover h1 .out');
+  if (a) t.from(a.chars, { yPercent: 110, duration: 0.8, stagger: 0.05 }, 0); else t.from('.cover h1 span:first-child', { y: 40, opacity: 0 }, 0);
+  t.from(b, { xPercent: -8, opacity: 0, duration: 0.9 }, 0.35);
+  t.from('.role, .sum', { y: 20, opacity: 0, duration: 0.7, stagger: 0.12 }, 0.7).from('.cta .btn', { y: 16, opacity: 0, duration: 0.5, stagger: 0.1 }, 1.0);
+  var draw = function (els, at, dur, gap, rev) { els.forEach(function (l, i) { var n = l.getTotalLength(); l.style.strokeDasharray = n; t.fromTo(l, { strokeDashoffset: rev ? -n : n }, { strokeDashoffset: 0, duration: dur, ease: 'power2.inOut' }, at + i * gap); }); };
+  t.from('.elev .g line', { opacity: 0, duration: 0.5, stagger: 0.06 }, 0.3);
+  t.from('.elev .bub circle', { scale: 0, transformOrigin: '50% 50%', duration: 0.4, stagger: 0.07, ease: 'back.out(2.5)' }, 0.5).from('.elev .bub text', { opacity: 0, duration: 0.3, stagger: 0.07 }, 0.7);
+  t.from('.elev .foot > *', { opacity: 0, duration: 0.4, stagger: 0.05 }, 0.8);
+  draw($('.elev .cols line'), 1.0, 0.9, 0.08); draw($('.elev .beams line'), 1.4, 0.6, 0.2);
+  draw($('.elev .dims path'), 2.3, 0.9, 0.25);
+  t.from('.elev .dims text, .elev > text', { opacity: 0, duration: 0.5, stagger: 0.15 }, 2.9);
+  k.$('.btn').forEach(function (x) { k.magnet(x, 0.25); });
+
+  $('.note').forEach(function (n, i) { var st = k.st(n, 'top 88%'); gsap.from(n, { y: 26, opacity: 0, duration: 0.6, delay: i * 0.12, scrollTrigger: st }); k.count(n.querySelector('b'), st); });
+  $('.xp').forEach(function (x) { var st = k.st(x);
+    k.scramble(x.querySelector('.xp-when'), st);
+    gsap.from($('.xp-body > *', x), { x: 36, opacity: 0, duration: 0.6, stagger: 0.07, ease: 'power3.out', scrollTrigger: st }); });
+  gsap.from('.stage', { opacity: 0, y: 30, duration: 0.6, stagger: 0.14, ease: 'power2.out', scrollTrigger: k.st('.stages') });
+
+  /* viewports: wipe open, a scan line passes, colour comes on while the view is centred */
+  $('.vp').forEach(function (v, i) {
+    var st = k.st(v, 'top 86%'), box = v.querySelector('.vp-img'), d = (i % 3) * 0.1;
+    gsap.fromTo(box, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 1, ease: 'power3.inOut', delay: d, scrollTrigger: st });
+    gsap.fromTo(v.querySelector('.scan'), { top: '0%', opacity: 1 }, { top: '100%', opacity: 0, duration: 1.3, ease: 'power1.in', delay: d + 0.2, scrollTrigger: st });
+    gsap.from($('figcaption > *', v), { y: 14, opacity: 0, duration: 0.5, stagger: 0.06, delay: d + 0.5, scrollTrigger: st });
+    gsap.fromTo(v.querySelector('img'), { scale: 1.15 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: v, start: 'top bottom', end: 'bottom top', scrub: true } });
+    ScrollTrigger.create({ trigger: v, start: 'top 62%', end: 'bottom 38%', toggleClass: { targets: v, className: 'lit' } });
+  });
+
+  var c = document.querySelector('.cmp'), sv = $('svg', c);
+  gsap.timeline({ scrollTrigger: k.st(c, 'top 78%') })
+    .from($('.raft', sv[0]), { opacity: 0, duration: 0.5 }).from($('.col rect', sv[0]), { scale: 0, transformOrigin: '50% 50%', duration: 0.3, stagger: 0.03, ease: 'back.out(3)' }, '-=0.2')
+    .from('.cmp > span', { x: -16, opacity: 0, duration: 0.4 })
+    .from($('.ft rect', sv[1]), { scale: 0, opacity: 0, transformOrigin: '50% 50%', duration: 0.45, stagger: 0.05, ease: 'back.out(1.8)' })
+    .from($('.col rect', sv[1]), { y: -26, opacity: 0, duration: 0.35, stagger: 0.04, ease: 'bounce.out' }, '-=0.4');
+
+  $('.cols').forEach(function (g) { gsap.from($('.card', g), { y: 30, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', scrollTrigger: k.st(g) }); });
+  $('.pills').forEach(function (p) { gsap.from($('.pill', p), { scale: 0.5, opacity: 0, duration: 0.4, stagger: 0.06, ease: 'back.out(2)', scrollTrigger: k.st(p, 'top 92%') }); });
+  gsap.from('.c-item', { opacity: 0, y: 20, duration: 0.5, stagger: 0.1, scrollTrigger: k.st('.c-list', 'top 88%') });
+});
+</script>
+</body>
+</html>
